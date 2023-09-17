@@ -6,7 +6,7 @@ This repository contains the code associated with Gozashti and Corbett-Detig's *
 
 We define "TE-compartmentalized genes" as genes whose flanking regions show TE density within the top 90th percentile when all genes are compared for a given species. This pipeline requires a genome sequence file in fasta format and cooresponding gene annotations in bed format, coding trancripts in fasta format and proteins in fasta format, as well as gene ontology annotations for each gene. All required input files can be obtained for any genome on genbank or refseq. Go annotations can be obtained from uniprot. You may also want to include a fasta file of TE-associated proteins to filter out potential spurious TE families. A basic library of TE proteins can be obtained from RepeatMasker (RepeatMasker/Libraries/RepeatPeps.lib). We ran this pipeline systematically across all species on genbank/refseq, so we created a wrapper to produce all necessary inputs given a genbank or refseq genome (see more on this below). However, you can also run it a standalone.
 
-### Dependencies
+### Tool dependencies
 
 Each of these should be visible in your path. You can install most required tools using conda.
 
@@ -17,7 +17,12 @@ Each of these should be visible in your path. You can install most required tool
 * fastaqual_select.pl from (https://github.com/sujaikumar/assemblage/tree/master)
 * bedtools
 * goatools
+* TE-compartmentalization/util
+
+### Data dependencies
+
 * go-obo file (can be obtained from https://geneontology.org/docs/download-ontology/#go_basic)
+* Library of TE proteins (such as RepeatMasker/Libraries/RepeatPeps.lib)
 
 ### Standalone usage
 
