@@ -24,8 +24,9 @@ Make a new directory and copy TE-compartmentalization_pipeline.sh to that direct
 1. Create a copy of your genome fasta file
 2. Move the corresponding transcript fasta file to that directory and name it transcripts.fa
 3. Move the corresponding protein fasta file to that directory and name it proteins.fa
-4. Create a bed file for all genes in the genome named "geneFile_final.tsv". This file should have six columns. For each gene the first four columns should contain the scaffold, start, stop and gene name. The last two columns are not used in the analysis and can simply be ".".
-5. 
+4. Create a bed file for all genes in the genome named "geneFile_final.tsv". This file should have six columns. For each gene the first four columns should contain the scaffold, start, stop and gene name. The last two columns are not used in the analysis and can simply be "."
+5. A file named "all_genes.list_final.filtered" which can be generated with the command ``` cut -f 4 geneFile_final.tsv > all_genes.list_final.filtered ```
+6. A file named "gene2GO_final.tsv" with GO annotations for each gene. This file contains two columns. For each gene, the first column gives the gene name (must be consistent with other files) and the second column contains GO annotations for that gene. If a gene has multiple GO annotations, they should be separated by ";" (e.g. GO:111111;GO:222222;GO:333333). 
 
 ```
 sh TE-compartmentalization_pipeline.sh {species_name} {genome.fasta}  {TE_proteins.fa} {go-obo file} {percentile}
