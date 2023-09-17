@@ -12,6 +12,7 @@ Each of these should be visible in your path. You can install most required tool
 
 * RepeatModeler2
 * RepeatMasker
+* RepeatMasker utils (PathToRepeatMakser/util)
 * Blast
 * fastaqual_select.pl from (https://github.com/sujaikumar/assemblage/tree/master)
 * bedtools
