@@ -8,7 +8,7 @@ We define "TE-compartmentalized genes" as genes whose flanking regions show TE d
 
 ### Tool dependencies
 
-Each of these should be visible in your path. You can install most required tools using conda.
+Each of these should be visible in your path. 
 
 * RepeatModeler2
 * RepeatMasker
@@ -17,7 +17,7 @@ Each of these should be visible in your path. You can install most required tool
 * fastaqual_select.pl from (https://github.com/sujaikumar/assemblage/tree/master)
 * bedtools
 * goatools
-* TE-compartmentalization/util
+* bioawk
 
 ### Data dependencies
 
