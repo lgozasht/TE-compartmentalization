@@ -41,8 +41,18 @@ Then, run the script, specifying the species name (no spaces), genome fasta file
 sh TE-compartmentalization_pipeline.sh {species_name} {genome.fasta} {PATH/TO/TE_proteins.fasta} {PATH/TO/gofile.obo} {percentile}
 ```
 
+Final GO enrichment results for TE-compartmentalized genes are generated in "gene_centric_analysis" and "gene_centric_flank_analysis", and end in ".out". For the "gene_centric_analysis" results, TE-compartmentalization is assessed using both the gene and it's 50kb flanking regions (think bedtools slop). For the "gene_centric_flank_analysis" results, TE-compartmentalization is assessed only using gene flanking regions.
+
 ### Running the pipeline on all refseq and genbank species
 
-We created a wrapper to run the pipeline systematically on all (or a subset of) genomes on RefSeq/GenBank. The wrapper 
+We created a wrapper to run the pipeline systematically on all (or a subset of) genomes on RefSeq/GenBank. The wrapper only requires a csv file providing metadata for each genome as input, which can be retrieved from NCBI. The wrapper iteratively downloads all necessary data for each genome from NCBI and Uniprot and runs the TE-compartmentalization pipeline. If a species has a RefSeq and a GenBank assembly, the program chooses whichever genome has more genes with GO annotations.
+
+#### Usage
+```
+python allEukaryoteWrapper.py {genomes.csv} {PATH/TO/TE_proteins.fasta} {PATH/TO/gofile.obo} {percentile}
+```
+
+
+
 
 
