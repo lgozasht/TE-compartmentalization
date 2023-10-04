@@ -167,5 +167,5 @@ with open('{0}'.format(linkFile),'r') as f:
             fnaFile= downloadData(refSeqLink, species, refSeqLink)
     
         
-        runAnalysis(fnaFile, species)    
+        runAnalysis(fnaFile, species, TEProteinFile, goOboFile, cutoff)    
         
