@@ -124,7 +124,7 @@ def downloadData(link, species, refseq):
 
 
     os.chdir('..')
-    os.system('sh ../util/convertFasta.sh {0} {1}'.format(species,fnaFile.replace('.gz','')))
+    os.system('sh ./util/convertFasta.sh {0} {1}'.format(species,fnaFile.replace('.gz','')))
     os.chdir(species)
     
     return fnaFile
