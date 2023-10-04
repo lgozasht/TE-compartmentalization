@@ -16,7 +16,7 @@ def checkAnnotation(link, species):
 
 
             os.system('gunzip {0}'.format(gffFile))
-            os.system('python ../util/makeGeneFile_RefSeq.py {0}'.format(gffFile.replace('.gz','')))
+            os.system('python ./util/makeGeneFile_RefSeq.py {0}'.format(gffFile.replace('.gz','')))
             os.system('mv geneFile.tsv {0}'.format(species))
             os.system('mv geneFileID.tsv {0}'.format(species))        
             os.system('cut -f 4 {0}/geneFile.tsv > {0}/all_genes.list'.format(species))
@@ -29,7 +29,7 @@ def checkAnnotation(link, species):
         if os.path.isfile(gffFile):
 
             os.system('gunzip {0}'.format(gffFile))
-            os.system('python ../util/makeGeneFile_GenBank.py {0}'.format(gffFile.replace('.gz','')))
+            os.system('python ./util/makeGeneFile_GenBank.py {0}'.format(gffFile.replace('.gz','')))
             with open("geneFile_genbank.tsv", 'r') as fp:
                 lines = len(fp.readlines())
                 if lines < 50:
