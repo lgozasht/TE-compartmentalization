@@ -31,42 +31,38 @@ filter_repeats () {
   #$1 = species name (no spaces)
   #$2 = path to TE protein fasta file
 
-  if test -f "transcripts.fa"; then
-    echo "no transcript file, skipping filtering step"
+  echo "filtering"
+  #make blast database for TE protein library
+  makeblastdb -in $2 -dbtype prot
 
-  else
-    echo "filtering"
-    #make blast database for TE protein library
-    makeblastdb -in $2 -dbtype prot
-  
-    #blast species proteins against TE database
-    blastp -query proteins.fa \
-         -db $2 \
-         -outfmt '6 qseqid staxids bitscore std sscinames sskingdoms stitle' \
-         -max_target_seqs 25 \
-         -culling_limit 2 \
-         -evalue 1e-5 \
-         -out proteins.fa.vs.RepeatPeps.25cul2.1e5.blastp.out
-  
-    #Remove TE-associated 
-    python ../util/FilterTEsFromTranscripts.py
-  
-    #make blast db for species transcripts minus those associated with TEs
-    makeblastdb -in transcripts.no_tes.fa -dbtype nucl
-  
-    #blast TE library at transcripts
-    blastn -task megablast \
-         -query $1-families.fa \
-         -db transcripts.no_tes.fa \
-         -outfmt '6 qseqid staxids bitscore std sscinames sskingdoms stitle' \
-         -max_target_seqs 25 \
-         -culling_limit 2 \
-         -evalue 1e-25 \
-         -out repeatmodeller_lib.vs.transcripts.no_tes.25cul2.1e10.megablast.out
-  
-    #Remove unknown TE families with hits to non-TE-associated species proteins 
-    fastaqual_select.pl -f $1-families.fa \
-         -e <(awk '{print $1}' repeatmodeller_lib.vs.transcripts.no_tes.25cul2.1e10.megablast.out | grep -i "Unknown" | sort | uniq) > consensi.fa.classified.filtered_for_CDS_repeats.fa
+  #blast species proteins against TE database
+  blastp -query proteins.fa \
+       -db $2 \
+       -outfmt '6 qseqid staxids bitscore std sscinames sskingdoms stitle' \
+       -max_target_seqs 25 \
+       -culling_limit 2 \
+       -evalue 1e-5 \
+       -out proteins.fa.vs.RepeatPeps.25cul2.1e5.blastp.out
+
+  #Remove TE-associated 
+  python ../util/FilterTEsFromTranscripts.py
+
+  #make blast db for species transcripts minus those associated with TEs
+  makeblastdb -in transcripts.no_tes.fa -dbtype nucl
+
+  #blast TE library at transcripts
+  blastn -task megablast \
+       -query $1-families.fa \
+       -db transcripts.no_tes.fa \
+       -outfmt '6 qseqid staxids bitscore std sscinames sskingdoms stitle' \
+       -max_target_seqs 25 \
+       -culling_limit 2 \
+       -evalue 1e-25 \
+       -out repeatmodeller_lib.vs.transcripts.no_tes.25cul2.1e10.megablast.out
+
+  #Remove unknown TE families with hits to non-TE-associated species proteins 
+  fastaqual_select.pl -f $1-families.fa \
+       -e <(awk '{print $1}' repeatmodeller_lib.vs.transcripts.no_tes.25cul2.1e10.megablast.out | grep -i "Unknown" | sort | uniq) > consensi.fa.classified.filtered_for_CDS_repeats.fa
   fi
 }
 
