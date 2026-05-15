@@ -63,7 +63,7 @@ filter_repeats () {
   #Remove unknown TE families with hits to non-TE-associated species proteins 
   fastaqual_select.pl -f $1-families.fa \
        -e <(awk '{print $1}' repeatmodeller_lib.vs.transcripts.no_tes.25cul2.1e10.megablast.out | grep -i "Unknown" | sort | uniq) > consensi.fa.classified.filtered_for_CDS_repeats.fa
-  fi
+  
 }
 
 
